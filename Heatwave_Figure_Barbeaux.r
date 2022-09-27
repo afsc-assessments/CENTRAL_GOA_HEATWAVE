@@ -119,8 +119,13 @@ file.remove(file)
 
 
 ## Going to coastwatch for latest data still... need to be connected via VPN
-download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21NrtAgg.nc?sst[(2020-05-25T12:00:00Z):1:(last)][(0.0):1:(0.0)][(52):1:(62)][(200):1:(215)]"),
+## download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21NrtAgg.nc?sst[(2020-05-25T12:00:00Z):1:(last)][(0.0):1:(0.0)][(52):1:(62)][(200):1:(215)]"),
+##              method = "libcurl", mode="wb",destfile = "test_OISST.nc")
+
+## Going to ncei for latest data 
+download.file(url = paste0("https://www.ncei.noaa.gov/erddap/griddap/ncdc_oisst_v2_avhrr_prelim_by_time_zlev_lat_lon.nc?sst%5B(2022-09-11T12:00:00Z):1:(last)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
               method = "libcurl", mode="wb",destfile = "test_OISST.nc")
+
 
 ## check to see if download worked as the coastwatch often fails, stop if failed.
 if(!file.exists("test_OISST.nc")) {stop("File did not download")}
