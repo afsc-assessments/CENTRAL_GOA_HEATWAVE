@@ -53,7 +53,7 @@ UrchinPurple3='#575195'
 UrchinPurple4='#9A9A9A'
 
 #----------------------------------------------------------------------------------------------------------
-#  This chunk should not need to be run again. It downloads data from 9/1/1981 to 5/16/2020 and might not work anymore as 
+#  This chunk should be run once and then not need to be run again. It downloads data from 9/1/1981 to 5/16/2020 
 #----------------------------------------------------------------------------------------------------------
 
 #  Download the data for a fixed spatial and temporal period.
