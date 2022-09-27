@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------------
 ## set default directory
 ### This will need to be changed...
-dir="C:/WORKING_FOLDER/climate_data/Heatwave_files"
+dir1="C:/WORKING_FOLDER/climate_data/Heatwave_files"
 
 #  Load R libraries
 library(ncdf4)
@@ -110,7 +110,7 @@ UrchinPurple4='#9A9A9A'
 #####################################################################################################
 
 
-setwd(dir)
+setwd(dir1)
 load('Heatwave_figure.RData')
 
 file=list.files(pattern=".nc")
