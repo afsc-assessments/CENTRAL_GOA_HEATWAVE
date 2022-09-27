@@ -122,6 +122,9 @@ file.remove(file)
 download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21NrtAgg.nc?sst[(2020-05-25T12:00:00Z):1:(last)][(0.0):1:(0.0)][(52):1:(62)][(200):1:(215)]"),
               method = "libcurl", mode="wb",destfile = "test_OISST.nc")
 
+## check to see if download worked as the coastwatch often fails, stop if failed.
+if(!file.exists("test_OISST.nc")) {stop("File did not download")}
+   
 file=list.files(pattern=".nc")
 
 ## pull the .nc file, clip it using the shape file to the 300m isobath in central GOA, and calculate the daily mean
