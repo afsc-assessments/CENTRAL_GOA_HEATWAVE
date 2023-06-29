@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------------
 ## set default directory
 ### This will need to be changed...
-dir1="C:/WORKING_FOLDER/climate_data/Heatwave_files"
+dir1="C:/Users/steve.barbeaux/Work/GitHub/CENTRAL_GOA_HEATWAVE"
 
 #  Load R libraries
 library(ncdf4)
@@ -128,7 +128,9 @@ file.remove(file)
 
 
 ## Going to ncei for latest data 
-download.file(url = paste0("https://www.ncei.noaa.gov/erddap/griddap/ncdc_oisst_v2_avhrr_prelim_by_time_zlev_lat_lon.nc?sst%5B(2022-09-11T12:00:00Z):1:(last)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#download.file(url = paste0("https://www.ncei.noaa.gov/erddap/griddap/ncdc_oisst_v2_avhrr_prelim_by_time_zlev_lat_lon.nc?sst%5B(2022-09-11T12:00:00Z):1:(last)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#              method = "libcurl", mode="wb",destfile = "test_OISST.nc")
+download.file(url = paste0("https://www.ncei.noaa.gov/erddap/griddap/ncdc_oisst_v2_avhrr_by_time_zlev_lat_lon.nc?sst%5B(2022-09-11T12:00:00Z):1:(last)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
               method = "libcurl", mode="wb",destfile = "test_OISST.nc")
 
 
@@ -171,7 +173,7 @@ hobday$day_end<-0
 hobday<-data.table(hobday)
 
 
-img=readPNG(paste0(dir,"/FISHERIES Wide 360px.png"))
+img=readPNG(paste0(dir1,"/FISHERIES Wide 360px.png"))
 rast <- grid::rasterGrob(img, interpolate = T)
 
 if(nrow(event[day2>=max(hobday$day1)-90])>0){
@@ -217,7 +219,7 @@ d2<-d2+geom_line(data=hobday[year(day1)>=1981],aes(y=SST_seas,x=day1),size=0.1,c
 d2<-d2+geom_line(data=hobday[year(day1)>=1981],aes(y=rollmean(SST_seas, 360, na.pad=TRUE)),color=WavesTeal1,size=1.25)
 d2<-d2+geom_hline(data=hobday[year(day1)>=1981],aes(yintercept=0),color=OceansBlue1,size=1.25,alpha=0.5)+ylim(-3.25,3.25)
 d2<-d2+ylab(expression(paste(degree,"C from the mean for day of year")))+xlab("Date")+theme_bw(16)
-d2<-d2+scale_x_date(breaks = function(x) seq.Date(from = as_date("1982-01-01",format="%Y-%m-%d",tz="PST"), to = as_date("2020-12-01",format="%Y-%m-%d",tz="PST"), by = "2 years"),labels = date_format("%Y"))
+d2<-d2+scale_x_date(breaks = function(x) seq.Date(from = as_date("1982-01-01",format="%Y-%m-%d",tz="PST"), to = as_date(format(Sys.time(),format="%Y-%m-%d"),tz="PST"), by = "2 years"),labels = date_format("%Y"))
 d2<-d2+theme_bw()+theme(text=element_text(family='sans'),
   	    legend.position=c(0.15,0.95),
         legend.title=element_blank(),
@@ -581,9 +583,12 @@ events4[year(date_start)==2016&duration==90]$Intensity_Winter=91*1.7284
 events4$Intensity_CodRec<-0
 events4[ME%in%c(2:3)]$Intensity_CodRec<-events4[ME%in%c(2:3)]$Intensity_Total
 
+
+c_year<-year(Sys.time())
+
 MHWI<-events4[,list(Annual=sum(Intensity_Total),Summer=sum(Intensity_Summer),Winter=sum(Intensity_Winter),Spawning=sum(Intensity_CodRec)),by="YS"]
 names(MHWI)[1]<-"Year"
-x<-data.table(Year=c(1982:2022))
+x<-data.table(Year=c(1982:c_year))
 MHWI=merge(MHWI,x,all.y=T)
 MHWI[is.na(Winter)]$Winter<-0
 MHWI[is.na(Summer)]$Summer<-0
@@ -622,23 +627,36 @@ print(d)
 hobday$YEAR=year(hobday$day1)
 hobday$MONTH=month(hobday$day1)
 
+c_year<-year(Sys.time())
+C1_year<-c_year+1
+nc<-length(2015:c_year)
+library(RColorBrewer)
+myColors <- brewer.pal(nc,"Spectral")
+names(myColors)<-as.character(2015:c_year)
+colScale <- scale_colour_manual(name = "Year",values = myColors)
+
 x<-hobday[MONTH%in% c(1:5)&YEAR%in%c(1982:2012)][,list(MEANSST=mean(SST)),by="doy"]
-dsp<-ggplot(hobday[MONTH%in%c(1:5)&YEAR<2022],aes(x=doy,y=SST,group=YEAR))+geom_line(color='gray80',size=0.5)+theme_bw(base_size=18)+geom_line(data=x,aes(x=doy,y=MEANSST,group=NA),color="gray50",size=1.25,linetype=2)
-dsp<-dsp+geom_hline(yintercept=5,color="black",linetype=3)+geom_line(data=hobday[MONTH%in%c(1:5)&YEAR==2022],size=1.25,color="black")+geom_line(data=hobday[MONTH%in%c(1:5)&YEAR>2014&YEAR<2022],aes(color=factor(YEAR)),size=1)
-dsp<-dsp+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title="January through May 1981-2022")
+
+
+
+hobday$YEAR_f<-as.factor(hobday$YEAR)
+
+dsp<-ggplot(hobday[MONTH%in%c(1:5)&YEAR<C1_year],aes(x=doy,y=SST,group=YEAR))+geom_line(color='gray80',size=0.5)+theme_bw(base_size=18)+geom_line(data=x,aes(x=doy,y=MEANSST,group=NA),color="gray50",size=1.25,linetype=2)
+dsp<-dsp+geom_hline(yintercept=5,color="black",linetype=3)+geom_line(data=hobday[MONTH%in%c(1:5)&YEAR==c_year],size=1.25,color="black")+geom_line(data=hobday[MONTH%in%c(1:5)&YEAR>2014&YEAR<C1_year],aes(color=YEAR_f),size=1)
+dsp<-dsp+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title=paste0("October through December 1981-",c_year))+colScale
 #dsp<-dsp+geom_line(data=hobday[MONTH%in%c(1:4)&YEAR==2003],color="gray50",size=1)
 windows()
 
 xsu<-hobday[MONTH%in% c(6:9)&YEAR%in%c(1982:2012)][,list(MEANSST=mean(SST)),by="doy"]
-dsu<-ggplot(hobday[MONTH%in%c(6:9)&YEAR<2022],aes(x=doy,y=SST,group=YEAR))+geom_line(color='gray80',size=0.5)+theme_bw(base_size=18)+geom_line(data=xsu,aes(x=doy,y=MEANSST,group=NA),color="gray50",size=1.25,linetype=2)
-dsu<-dsu+geom_hline(yintercept=5,color="black",linetype=2)+geom_line(data=hobday[MONTH%in%c(6:9)&YEAR==2022],size=1.25,color="black")+geom_line(data=hobday[MONTH%in%c(6:9)&YEAR>2014&YEAR<2022],aes(color=factor(YEAR)),size=1)
-dsu<-dsu+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title="June through September 1981-2022")
+dsu<-ggplot(hobday[MONTH%in%c(6:9)&YEAR<C1_year],aes(x=doy,y=SST,group=YEAR))+geom_line(color='gray80',size=0.5)+theme_bw(base_size=18)+geom_line(data=xsu,aes(x=doy,y=MEANSST,group=NA),color="gray50",size=1.25,linetype=2)
+dsu<-dsu+geom_hline(yintercept=5,color="black",linetype=2)+geom_line(data=hobday[MONTH%in%c(6:9)&YEAR==c_year],size=1.25,color="black")+geom_line(data=hobday[MONTH%in%c(6:9)&YEAR>2014&YEAR<C1_year],aes(color=YEAR_f),size=1)
+dsu<-dsu+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title=paste0("October through December 1981-",c_year))+colScale
 
 
 xfa<-hobday[MONTH%in% c(10:12)&YEAR%in%c(1982:2012)][,list(MEANSST=mean(SST)),by="doy"]
-dfa<-ggplot(hobday[MONTH%in%c(10:12)&YEAR<2022],aes(x=doy,y=SST,group=YEAR))+geom_line(color='gray80',size=0.5)+theme_bw(base_size=18)+geom_line(data=xfa,aes(x=doy,y=MEANSST,group=NA),color="gray50",size=1.25,linetype=2)
-dfa<-dfa+geom_hline(yintercept=5,color="black",linetype=2)+geom_line(data=hobday[MONTH%in%c(10:12)&YEAR==2022],size=1.25,color="black")+geom_line(data=hobday[MONTH%in%c(10:12)&YEAR>2014&YEAR<2022],aes(color=factor(YEAR)),size=1)
-dfa<-dfa+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title="October through December 1981-2022")
+dfa<-ggplot(hobday[MONTH%in%c(10:12)&YEAR<C1_year],aes(x=doy,y=SST,group=YEAR))+geom_line(color='gray80',size=0.5)+theme_bw(base_size=18)+geom_line(data=xfa,aes(x=doy,y=MEANSST,group=NA),color="gray50",size=1.25,linetype=2)
+dfa<-dfa+geom_hline(yintercept=5,color="black",linetype=2)+geom_line(data=hobday[MONTH%in%c(10:12)&YEAR==c_year],size=1.25,color="black")+geom_line(data=hobday[MONTH%in%c(10:12)&YEAR>2014&YEAR<C1_year],aes(color=YEAR_f),size=1)
+dfa<-dfa+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title=paste0("October through December 1981-",c_year))+colScale
 
 ggarrange(dsp,dsu,dfa,heights=c(1,1),widths=c(1,1),align = c("h"),
           common.legend = TRUE, legend = "bottom")
