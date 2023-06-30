@@ -59,57 +59,73 @@ UrchinPurple4='#9A9A9A'
 #  Download the data for a fixed spatial and temporal period.
 #  (note this is a lot of data and will take a few minutes to download if you do the whole thing)
 
-# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21NrtAgg.nc?sst[(1971-01-01T12:00:00Z):1:(1990-12-31T12:00:00Z)][(0.0):1:(0.0)][(52):1:(62)][(200):1:(215)]"),
-#               method = "libcurl", mode="wb",destfile = "x1.nc")
+# options(timeout = max(300, getOption("timeout")))
 
-# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21NrtAgg.nc?sst[(1991-01-01T12:00:00Z):1:(2000-12-31T12:00:00Z)][(0.0):1:(0.0)][(52):1:(62)][(200):1:(215)]"),
-#               method = "libcurl", mode="wb",destfile = "x2.nc")
+# setwd(paste0(dir1,"/old_files"))
 
-# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21NrtAgg.nc?sst[(2001-01-01T12:00:00Z):1:(2010-12-31T12:00:00Z)][(0.0):1:(0.0)][(52):1:(62)][(200):1:(215)]"),
-#               method = "libcurl", mode="wb",destfile = "x3.nc")
+# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21Agg.nc?sst%5B(1981-09-01T12:00:00Z):1:(1985-12-31T12:00:00Z)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#                method = "auto", mode="wb",destfile = "x81_85.nc")
 
-# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21NrtAgg.nc?sst[(2011-01-01T12:00:00Z):1:(2019-12-31T12:00:00Z)][(0.0):1:(0.0)][(52):1:(62)][(200):1:(215)]"),
-#               method = "libcurl", mode="wb",destfile = "x4.nc")
+# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21Agg.nc?sst%5B(1986-01-01T12:00:00Z):1:(1990-12-31T12:00:00Z)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#                method = "auto", mode="wb",destfile = "x86_90.nc")
 
-# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21NrtAgg.nc?sst[(2020-01-01T12:00:00Z):1:(2020-05-24T12:00:00Z)][(0.0):1:(0.0)][(52):1:(62)][(200):1:(215)]"),
-#               method = "libcurl", mode="wb",destfile = "x5.nc")
+# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21Agg.nc?sst%5B(1991-01-01T12:00:00Z):1:(1995-12-31T12:00:00Z)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#                method = "auto", mode="wb",destfile = "x91_95.nc")
 
-# setwd("C:/WORKING_FOLDER/climate_data/data2")
+# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21Agg.nc?sst%5B(1996-01-01T12:00:00Z):1:(2000-12-31T12:00:00Z)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#                method = "auto", mode="wb",destfile = "x96_00.nc")
+
+# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21Agg.nc?sst%5B(2001-01-01T12:00:00Z):1:(2005-12-31T12:00:00Z)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#                method = "auto", mode="wb",destfile = "x01_05.nc")
+
+# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21Agg.nc?sst%5B(2006-01-01T12:00:00Z):1:(2010-12-31T12:00:00Z)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#                method = "auto", mode="wb",destfile = "x06_10.nc")
+
+# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21Agg.nc?sst%5B(2011-01-01T12:00:00Z):1:(2015-12-31T12:00:00Z)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#                method = "auto", mode="wb",destfile = "x11_15.nc")
+
+# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21Agg.nc?sst%5B(2016-01-01T12:00:00Z):1:(2020-12-31T12:00:00Z)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#                method = "auto", mode="wb",destfile = "x16_20.nc")
+
+# download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21Agg.nc?sst%5B(2021-01-01T12:00:00Z):1:(2022-12-31T12:00:00Z)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+#                method = "auto", mode="wb",destfile = "x21_22.nc")
+
 
 # ## in the central Gulf of Alaska between 160°W and 145°W longitude 52N and 62N latitude.
-# img=readPNG("FISHERIES Wide 360px.png")
-# rast <- grid::rasterGrob(img, interpolate = T)
 
-# files=list.files(pattern=".nc")
-# buffer<-readOGR(dsn=path.expand(dir),layer="CENTRALGOA_CLIP")
+#  files=list.files(pattern=".nc")
+ 
+#  buffer<-readOGR(dsn=path.expand(dir1),layer="CENTRALGOA_CLIP")
 
-
-#  meanSST<-vector("list",length=length(files))
-#  for(i in 1:length(files)){
-#  	pre1.brick = brick(files[i])
-#  	pre1.brick = rotate(pre1.brick)
-#  	shp = spTransform(buffer, crs(pre1.brick))
-#  	pre1.mask = mask(pre1.brick, shp)
-#  	pre1.df = as.data.frame(pre1.mask, xy=TRUE)
-#  	pre1.df = pre1.df[complete.cases(pre1.df),]
-#  	SST=colSums(pre1.df[,3:ncol(pre1.df)])/nrow(pre1.df)
+#   meanSST<-vector("list",length=length(files))
+#   for(i in 1:length(files)){
+#   	pre1.brick = brick(files[i])
+#   	pre1.brick = rotate(pre1.brick)
+#   	shp = spTransform(buffer, crs(pre1.brick))
+#   	pre1.mask = mask(pre1.brick, shp)
+#   	pre1.df = as.data.frame(pre1.mask, xy=TRUE)
+#   	pre1.df = pre1.df[complete.cases(pre1.df),]
+#   	SST=colSums(pre1.df[,3:ncol(pre1.df)])/nrow(pre1.df)
 	
-#  	dates<-tidync(files[i]) %>% 
-#  	     hyper_tibble() %>% 
-#    	     mutate(date=as_datetime(time))
+#   	dates<-tidync(files[i]) %>% 
+#   	     hyper_tibble() %>% 
+#     	     mutate(date=as_datetime(time))
 	
-#  	meanSST[[i]]<-data.frame(day=unique(dates$date),SST=SST)
-#  }
+#   	meanSST[[i]]<-data.frame(day=unique(dates$date),SST=SST)
+#   }
 
-#  meanSST<-data.table(do.call(rbind,meanSST))
-#  meanSST<-meanSST[order(day),]
+#   meanSST<-data.table(do.call(rbind,meanSST))
+#   meanSST<-meanSST[order(day),]
 
-#  meanSST$day1<-as.Date(meanSST$day)
+#   meanSST$day1<-as.Date(meanSST$day)
+
+# setwd(dir1)
+
+#  img=readPNG("FISHERIES Wide 360px.png")
+#  rast <- grid::rasterGrob(img, interpolate = T)
 #  save.image('Heatwave_figure.RData')
-#
+
 #####################################################################################################
-
-
 setwd(dir1)
 load('Heatwave_figure.RData')
 
@@ -117,24 +133,11 @@ file=list.files(pattern=".nc")
 file.remove(file)
 
 
-
-## Going to coastwatch 
-#download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21NrtAgg.nc?sst[(2020-05-26T12:00:00Z):1:(last)][(0.0):1:(0.0)][(52):1:(62)][(200):1:(215)]"),
-#             method = "libcurl", mode="wb",destfile = "test_OISST.nc")
+download.file(url = paste0("https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21Agg.nc?sst%5B(2023-01-01T12:00:00Z):1:(last)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
+               method = "auto", mode="wb",destfile = "latest_OISST.nc")
 
 
-#download.file(url = paste0("https://www.ncei.noaa.gov/erddap/griddap/ncdc_oisst_v2_avhrr_by_time_zlev_lat_lon.nc?sst%5B(2020-05-26T12:00:00Z):1:(last)%5D%5B(0.0):1:(0.0)%5D%5B(52.000):1:(62.000)%5D%5B(200.000):1:(215.000)%5D"),
-#              method = "libcurl", mode="wb",destfile = "test_OISST.nc")
-
-
-## Going to ncei for latest data 
-#download.file(url = paste0("https://www.ncei.noaa.gov/erddap/griddap/ncdc_oisst_v2_avhrr_prelim_by_time_zlev_lat_lon.nc?sst%5B(2022-09-11T12:00:00Z):1:(last)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
-#              method = "libcurl", mode="wb",destfile = "test_OISST.nc")
-download.file(url = paste0("https://www.ncei.noaa.gov/erddap/griddap/ncdc_oisst_v2_avhrr_by_time_zlev_lat_lon.nc?sst%5B(2022-09-11T12:00:00Z):1:(last)%5D%5B(0.0):1:(0.0)%5D%5B(52):1:(62)%5D%5B(200):1:(215)%5D"),
-              method = "libcurl", mode="wb",destfile = "test_OISST.nc")
-
-
-if(!file.exists("test_OISST.nc")) {stop("File did not download")}
+if(!file.exists("latest_OISST.nc")) {stop("File did not download")}
 
 file=list.files(pattern=".nc")
 
@@ -612,17 +615,6 @@ d<-d+ylab(expression(paste(degree,"C days",sep="")))+xlab("Year")+theme_bw(base_
 windows()
 print(d)
 
-
-#d<-ggplot(data=Event_1[!Season%in%c("Summer","Spawning")],aes(x=Year,y=Intensity,color=Season,size=Season))+scale_color_manual(values=c("salmon","blue"))
-#d<-d+geom_point()+scale_size_manual(values=c(4,2.5))
-#d<-d+geom_segment(data=Event_1[Season=="Annual"],aes(yend = 0, xend = Year),color="orange",size=1.5)
-#d<-d+geom_segment(data=Event_1[Season=="Winter"],aes(yend = 0, xend = Year),color="black",size=0.25)
-#d<-d+geom_point(data=Event_1[Season=="Annual"],size=4,color="salmon")
-#d<-d+geom_point(data=Event_1[Season=="Winter"],size=2.5,color="blue")
-#d<-d+geom_point(data=Event_1[Season=="Spawning"],size=1.75,color="dark green")
-#d<-d+ylab(expression(paste(degree,"C days",sep="")))+xlab("Year")+theme_bw(base_size=20)
-#d
-
 ## Auxilary graphs on daily temp by year for different seasons
 hobday$YEAR=year(hobday$day1)
 hobday$MONTH=month(hobday$day1)
@@ -674,4 +666,38 @@ dsp<-dsp+geom_hline(yintercept=5,color="black",linetype=3)+geom_line(data=hobday
 dsp<-dsp+geom_line(data=hobday[MONTH%in%c(1:5)&YEAR%in%c(2018,2022)],aes(color=factor(YEAR)),size=1)
 dsp<-dsp+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title="January through May 1981-2022")
 #dsp<-dsp+geom_line(data=hobday[MONTH%in%c(1:4)&YEAR==2003],color="gray50",size=1)
-windows()
+
+### creating files for stock assessment
+
+# HW<-data.table(read.csv('MHWI.csv'))
+# CFSR<-data.table(read.csv('raw_cfsr.csv'))
+# CFSR1<-data.table(YR=CFSR[Month==2]$Year,JUNE_TEMP=CFSR[Month==6]$X0_20,FEB_TEMP=CFSR[Month==2]$X0_20)
+# CFSR1$TEMP<-CFSR1$JUNE_TEMP-mean(CFSR1[YR%in%c(1982:2012)]$JUNE_TEMP)
+# HeatWave<-data.table(YR=HW$Year,THW=HW$Annual,WHW=HW$Winter,SHW=HW$Spawning)
+
+# TEMP_HEAT<-merge(CFSR1,HeatWave, all.x=T)
+# TEMP_HEAT[is.na(TEMP_HEAT)]<-0
+
+# write.csv(TEMP_HEAT,'TEMPANDHEAT.csv',row.names =FALSE)
+
+meanSST_cfsr<-data.table(meanSST)
+meanSST_cfsr$MONTH<-month(meanSST_cfsr$day)
+meanSST_cfsr$YR<-year(meanSST_cfsr$day)
+
+SST2<-meanSST_cfsr[,list(MEANSST=mean(SST)),by=c('YR','MONTH')]
+
+HW<- MHWI 
+
+CFSR1<-data.table(YR=SST2[MONTH==2]$YR,JUNE_TEMP=SST2[MONTH==6]$MEANSST,FEB_TEMP=SST2[MONTH==2]$MEANSST)
+CFSR1$TEMP<-CFSR1$JUNE_TEMP-mean(CFSR1[YR%in%c(1982:2012)]$JUNE_TEMP)
+HeatWave<-data.table(YR=HW$Year,THW=HW$Annual,WHW=HW$Winter,SHW=HW$Spawning)
+
+TEMP_HEAT<-merge(CFSR1,HeatWave, all.x=T)
+TEMP_HEAT[is.na(TEMP_HEAT)]<-0
+
+write.csv(TEMP_HEAT,'TEMPANDHEAT.csv',row.names =FALSE)
+
+
+
+
+
