@@ -635,14 +635,14 @@ hobday$YEAR_f<-as.factor(hobday$YEAR)
 
 dsp<-ggplot(hobday[MONTH%in%c(1:5)&YEAR<C1_year],aes(x=doy,y=SST,group=YEAR))+geom_line(color='gray80',size=0.5)+theme_bw(base_size=18)+geom_line(data=x,aes(x=doy,y=MEANSST,group=NA),color="gray50",size=1.25,linetype=2)
 dsp<-dsp+geom_hline(yintercept=5,color="black",linetype=3)+geom_line(data=hobday[MONTH%in%c(1:5)&YEAR==c_year],size=1.25,color="black")+geom_line(data=hobday[MONTH%in%c(1:5)&YEAR>2014&YEAR<C1_year],aes(color=YEAR_f),size=1)
-dsp<-dsp+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title=paste0("October through December 1981-",c_year))+colScale
+dsp<-dsp+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title=paste0("January through April 1981-",c_year))+colScale
 #dsp<-dsp+geom_line(data=hobday[MONTH%in%c(1:4)&YEAR==2003],color="gray50",size=1)
 windows()
 
 xsu<-hobday[MONTH%in% c(6:9)&YEAR%in%c(1982:2012)][,list(MEANSST=mean(SST)),by="doy"]
 dsu<-ggplot(hobday[MONTH%in%c(6:9)&YEAR<C1_year],aes(x=doy,y=SST,group=YEAR))+geom_line(color='gray80',size=0.5)+theme_bw(base_size=18)+geom_line(data=xsu,aes(x=doy,y=MEANSST,group=NA),color="gray50",size=1.25,linetype=2)
 dsu<-dsu+geom_hline(yintercept=5,color="black",linetype=2)+geom_line(data=hobday[MONTH%in%c(6:9)&YEAR==c_year],size=1.25,color="black")+geom_line(data=hobday[MONTH%in%c(6:9)&YEAR>2014&YEAR<C1_year],aes(color=YEAR_f),size=1)
-dsu<-dsu+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title=paste0("October through December 1981-",c_year))+colScale
+dsu<-dsu+labs(y=expression('Sea surface temperature ('~degree*C~")"),x="Day of the year",color='Year', title=paste0("May through September 1981-",c_year))+colScale
 
 
 xfa<-hobday[MONTH%in% c(10:12)&YEAR%in%c(1982:2012)][,list(MEANSST=mean(SST)),by="doy"]
